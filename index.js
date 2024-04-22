@@ -3,6 +3,10 @@ import Fastify from "fastify";
 const fastify = Fastify({
   logger: true,
 });
+import dotenv from "dotenv";
+dotenv.config();
+
+const port = process.env.PORT || 3001;
 
 // Declare a route
 fastify.get("/", async function handler(request, reply) {
@@ -44,8 +48,8 @@ fastify.route({
 
 // Run the server!
 try {
-  await fastify.listen({ port: 10000 });
-  console.log("running on 10000");
+  await fastify.listen({ port });
+  console.log(`running on ${port}`);
 } catch (err) {
   fastify.log.error(err);
   process.exit(1);
